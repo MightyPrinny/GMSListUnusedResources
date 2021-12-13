@@ -1057,6 +1057,29 @@ Bool IsArg(char const * arg, char const *name, char const *alias)
 	return CStringEqual(arg, name) || CStringEqual(arg, alias);
 }
 
+static char const * FL_License =
+"Copyright 2021 Fabián L.\n"
+"\n"
+"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation\n"
+"files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify,\n"
+"merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom theSoftware is\n"
+"furnished to do so, subject to the following conditions:\n"
+"\n"
+"The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n"
+"\n"
+"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT\n"
+"NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n"
+"NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES\n"
+"OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN \n"
+"CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+;
+
+void PrintLicenses()
+{
+	printf("%s\n\n", FL_License);
+	printf("strstrsse4\n\n%s\n", WojciechLicense);
+}
+
 void PrintHelp()
 {
 	printf(
@@ -1098,16 +1121,19 @@ void PrintHelp()
 "          This adds \"-- unused\" after the name of an unused resource to make\n"
 "          them easier to spot for humans.\n"
 "\n"
-"-gp --generate-project\n"
+"-gp --generate-project:\n"
 "          Generates a new project file in a new file in the project's folder\n"
 "          without the unused resources.\n"
 "\n"
-"-pf --project-prefix\n"
+"-pf --project-prefix:\n"
 "          Prefix used by the generated project file, the default is lw_\n"
 "\n"
-"-uc --unused-as-constants\n"
+"-uc --unused-as-constants:\n"
 "          Declare the unused resources as constants set to -4 in the generated\n"
 "          project file.\n"
+"\n"
+"--show-licenses\n"
+"          Shows the licenses for the code used to build this executable\n"
 "\n"
 );
 }
@@ -1439,6 +1465,12 @@ int main(int argc, char** argv)
 		else if(IsArg(argv[1], "--help", "-h"))
 		{
 			PrintHelp();
+			DeleteMemoryStack(mem);
+			return 0;
+		}
+		else if(CStringEqual(argv[1], "--show-licenses"))
+		{
+			PrintLicenses();
 			DeleteMemoryStack(mem);
 			return 0;
 		}
