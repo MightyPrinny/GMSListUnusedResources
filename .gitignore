@@ -1,0 +1,8 @@
+*.vscode
+.vscode/*
+*.a
+build/*
+*.log
+gmon.out
+compile_commands.json
+prof_output

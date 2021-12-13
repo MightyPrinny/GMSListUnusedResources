@@ -1,0 +1,1 @@
+To build on windows use MYSYS2
