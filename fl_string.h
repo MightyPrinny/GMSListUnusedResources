@@ -195,49 +195,49 @@ void Copy(Buffer source, char *dest)
 
 void StringEqualsTest()
 {
-	assert(StringEqual(BStr("ass"), BStr("ass")));
-	assert(!StringEqual(BStr("Ass"), BStr("ass")));
-	assert(!StringEqual(BStr("Ass"), BStr("Asscheeks")));
-	assert(!StringEqual(BStr("Axscheeks"), BStr("Asscheeks")));
-	assert(!StringEqual(BStr("Asscheeks"), BStr("Ass")));
-	assert(StringContains(StrArg("Asscheeks"), StrArg("Ass")));
-	assert(!StringContains(StrArg("Ass"), StrArg("Asss")));
-	assert(StringContains(StrArg("Asscheeks"), StrArg("Ass")));
-	assert(!StringContains(StrArg("Asscheeks"), StrArg("Asss")));
+	assert(StringEqual(BStr("abc"), BStr("abc")));
+	assert(!StringEqual(BStr("Abc"), BStr("abc")));
+	assert(!StringEqual(BStr("Abc"), BStr("Abccheeks")));
+	assert(!StringEqual(BStr("Axscheeks"), BStr("Abccheeks")));
+	assert(!StringEqual(BStr("Abccheeks"), BStr("Abc")));
+	assert(StringContains(StrArg("Abccheeks"), StrArg("Abc")));
+	assert(!StringContains(StrArg("Abc"), StrArg("Abcs")));
+	assert(StringContains(StrArg("Abccheeks"), StrArg("Abc")));
+	assert(!StringContains(StrArg("Abccheeks"), StrArg("Abcs")));
 	assert(StringContains(StrArg("</room>"), StrArg("</room")));
 	assert(!StringContains(StrArg("</rooms>"), StrArg("</roomsz>")));
 }
 
 void EndsWithTest()
 {
-	assert(EndsWith(BStr("Ass"), BStr("ss")));
+	assert(EndsWith(BStr("Abc"), BStr("bc")));
 	assert(EndsWith(BStr("Cars.room.gmx"), BStr(".room.gmx")));
 	assert(EndsWith(BStr("Cars.room.goop"), BStr(".room.goop")));
 	assert(!EndsWith(BStr("Cars.room.goop"), BStr(".room.gmx")));
 	assert(!EndsWith(BStr("cat.object"), BStr("tce")));
-	printf("Ends With test passed\n");
+	printf("Ends With test pabced\n");
 }
 
 void TestSubstrNoExtension()
 {
-	assert( StringEqual(BStr("ass"), SubstrNoExtension(BStr("ass.Room.gmx"))) );
-	assert( !StringEqual(BStr(".ass"), SubstrNoExtension(BStr(" "))) );
-	assert( StringEqual(BStr("Mario"), SubstrNoExtension(BStr("Mario.ass"))) );
+	assert( StringEqual(BStr("abc"), SubstrNoExtension(BStr("abc.Room.gmx"))) );
+	assert( !StringEqual(BStr(".abc"), SubstrNoExtension(BStr(" "))) );
+	assert( StringEqual(BStr("Mario"), SubstrNoExtension(BStr("Mario.abc"))) );
 	assert( StringEqual(BStr("Mario"), SubstrNoExtension(BStr("Mario"))) );
 }
 
 void TestSubstrBaseName()
 {
-	assert( StringEqual(SubstrBasename(BStr("Dir0/ass")), BStr("ass")) );
-	auto specialCase = SubstrBasename(BStr("Dir0/.ass"));
+	assert( StringEqual(SubstrBasename(BStr("Dir0/abc")), BStr("abc")) );
+	auto specialCase = SubstrBasename(BStr("Dir0/.abc"));
 	assert(specialCase.size == 0);
-	assert( StringEqual(SubstrBasename(BStr("Dir1/dir2/Mario.ass")), BStr("Mario")) );
+	assert( StringEqual(SubstrBasename(BStr("Dir1/dir2/Mario.abc")), BStr("Mario")) );
 	assert( StringEqual(SubstrBasename(BStr("Mario")), BStr("Mario")) );
 	//Same with backslash
-	assert( StringEqual(SubstrBasename(BStr("Dir0\\ass")), BStr("ass")) );
-	specialCase = SubstrBasename(BStr("Dir0\\.ass"));
+	assert( StringEqual(SubstrBasename(BStr("Dir0\\abc")), BStr("abc")) );
+	specialCase = SubstrBasename(BStr("Dir0\\.abc"));
 	assert(specialCase.size == 0);
-	assert( StringEqual(SubstrBasename(BStr("Dir1\\dir2\\Mario.ass")), BStr("Mario")) );
+	assert( StringEqual(SubstrBasename(BStr("Dir1\\dir2\\Mario.abc")), BStr("Mario")) );
 	assert( StringEqual(SubstrBasename(BStr("Mario")), BStr("Mario")) );
 }
 

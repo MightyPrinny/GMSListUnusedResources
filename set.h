@@ -363,35 +363,35 @@ void TestStringSet(MemoryStack *mem)
 	StringSet *set = PushStringSet(mem, 240, 100);
 	
 	
-	Add(set, StrArg("Pikachu"));
-	Add(set, StrArg("Gorilla"));
-	Add(set, StrArg("Ironmouse"));
-	Add(set, StrArg("ironmouse"));
-	Add(set, StrArg("objRevealTiles"));
+	Add(set, StrArg("PTestStr"));
+	Add(set, StrArg("GsTrTest"));
+	Add(set, StrArg("ATestStr"));
+	Add(set, StrArg("aTestStr"));
+	Add(set, StrArg("objTestA"));
 
-	assert(Contains(set, StrArg("Pikachu")));
-	assert(Contains(set, StrArg("Gorilla")));
-	assert(!Contains(set, StrArg("gorilla")));
-	assert(Contains(set, StrArg("Ironmouse")));
-	assert(Contains(set, StrArg("ironmouse")));
-	assert(Contains(set, StrArg("objRevealTiles")));
-	assert(!Contains(set, StrArg("objMegaBoy")));
+	assert(Contains(set, StrArg("PTestStr")));
+	assert(Contains(set, StrArg("GsTrTest")));
+	assert(!Contains(set, StrArg("gStRtEST")));
+	assert(Contains(set, StrArg("ATestStr")));
+	assert(Contains(set, StrArg("aTestStr")));
+	assert(Contains(set, StrArg("objTestA")));
+	assert(!Contains(set, StrArg("objTestB")));
 
 	StringSet *setInt = PushStringSet(mem, 2048, 11000);
 
-	Add(setInt, StrArg("Pikachu"), 32u);
-	Add(setInt, StrArg("Gorilla"), 16u);
-	Add(setInt, StrArg("Ironmouse"), 22u);
-	Add(setInt, StrArg("ironmouse"), 19u);
-	Add(setInt, StrArg("objRevealTiles"),29u);
+	Add(setInt, StrArg("PTestStr"), 32u);
+	Add(setInt, StrArg("GsTrTest"), 16u);
+	Add(setInt, StrArg("ATestStr"), 22u);
+	Add(setInt, StrArg("aTestStr"), 19u);
+	Add(setInt, StrArg("objTestA"),29u);
 
-	assert(Contains(setInt, StrArg("Pikachu")));
-	assert(Contains(setInt, StrArg("Gorilla")));
-	assert(!Contains(setInt, StrArg("gorilla")));
-	assert(Contains(setInt, StrArg("Ironmouse")));
-	assert(Contains(setInt, StrArg("ironmouse")));
-	assert(Contains(setInt, StrArg("objRevealTiles")));
-	assert(!Contains(setInt, StrArg("objMegaBoy")));
+	assert(Contains(setInt, StrArg("PTestStr")));
+	assert(Contains(setInt, StrArg("GsTrTest")));
+	assert(!Contains(setInt, StrArg("gStRtEST")));
+	assert(Contains(setInt, StrArg("ATestStr")));
+	assert(Contains(setInt, StrArg("aTestStr")));
+	assert(Contains(setInt, StrArg("objTestA")));
+	assert(!Contains(setInt, StrArg("objTestB")));
 
 	for(auto it = IterateStringSet(set);
 		MoveNext(&it);)
