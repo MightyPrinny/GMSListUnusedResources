@@ -1084,7 +1084,7 @@ void PrintHelp()
 {
 	printf(
 "GMS 1.4 List Unused Resources\n"
-"2021 - https://github.com/MightyPrinny/\n"
+"2021 - https://github.com/MightyPrinny/GMSListUnusedResources\n"
 "\n"
 "This program analizes a GMS 1.4 project and lists all the unused resources\n"
 "in it by scanning all the resources used by the rooms in the project\n"
