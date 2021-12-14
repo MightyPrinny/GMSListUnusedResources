@@ -591,6 +591,26 @@ void ScanObjectFile(Directory const *rootFolder, Buffer *fileBuff, ResMap *resMa
 			}
 		}
 	}
+
+
+	
+	if(TrySeekAfterTagOpenName(&walk, StrArg("parentName")))
+	{
+		GetStringValueAndCloseTag(&walk);
+		if(walk.str.size > 0)
+		{
+			if(TryGet(resMap->objects, walk.str.ptr, walk.str.size, &outVal))
+			{
+				if(Add(usedRes, outVal.asBuff.ptr, outVal.asBuff.size, outVal))
+				{		
+					printf(BUFF_FORMAT "\n", BUFF_PRINTARG(outVal.asBuff));
+					AddResToNextList(BStr("objects"), outVal.asBuff, BStr(".object.gmx"), nextScan, pathPastePos);
+				}
+			}
+			
+		}
+	}
+
 	if(TrySeekAfterTagOpenName(&walk, StrArg("maskName")))
 	{
 		GetStringValueAndCloseTag(&walk);
@@ -606,6 +626,8 @@ void ScanObjectFile(Directory const *rootFolder, Buffer *fileBuff, ResMap *resMa
 			}
 		}
 	}
+
+	
 
 	if(TrySeekAfterTagOpenName(&walk, StrArg("path")))
 	{
@@ -1077,7 +1099,9 @@ static char const * FL_License =
 void PrintLicenses()
 {
 	printf("%s\n\n", FL_License);
+	printf("Hash function from :\nhttps://www.codeproject.com/Articles/716530/Fastest-Hash-Function-for-Table-Lookups-in-C\n");
 	printf("strstrsse4\n\n%s\n", WojciechLicense);
+	
 }
 
 void PrintHelp()
