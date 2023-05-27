@@ -6,18 +6,25 @@
 #include <stdlib.h>
 #include <string.h>
 #include <string>
-#include "str_str_sse4.h"
 //#include "meow_hash_x64_aesni.h"
 #include <assert.h>
 
-#include <strings.h>
 
+#ifndef WIN32
 #define InlineFunc inline __attribute__((always_inline))
+#else
+#define InlineFunc inline
+#endif
 
 #define ArraySize(x) ((sizeof(x) / sizeof(0 [x])) / ((size_t)(!(sizeof(x) % sizeof(0 [x])))))
 
+#ifndef WIN32
 #define Likely(x)    __builtin_expect (!!(x), 1)
 #define Unlikely(x)  __builtin_expect (!!(x), 0)
+#else
+#define Likely(x) x 
+#define Unlikely(x)  x
+#endif
 
 
 typedef unsigned int str_size_t;
@@ -48,7 +55,10 @@ uint32_t FNV1A_Pippip_Yurii(const char *str, size_t wrdlen)
 	if (wrdlen > 8) 
 	{
 		Cycles = ((wrdlen - 1)>>4) + 1; NDhead = wrdlen - (Cycles<<3);
+#ifndef WIN32
 		#pragma nounroll
+
+#endif
 		for(; Cycles--; str += 8) 
 		{
 			hash64 = ( hash64 ^ (*(uint64_t *)(str)) ) * PRIME;        

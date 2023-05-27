@@ -39,34 +39,26 @@ void PrintAsString(Buffer b)
 InlineFunc
 Bool StringEqual(char const *cStrA, str_size_t sizeA, char const *cStrB, str_size_t sizeB)
 {
-	int result = 0;
-	if( (sizeA > 0) & (sizeB == sizeA))
-	{
-		result = sse42_strstr(cStrA, sizeA, cStrB, sizeB) == 0;
-	}
-	return result;
+	std::string_view vStr    = std::string_view(cStrA, std::string_view::size_type(sizeA));
+	std::string_view vStrB = std::string_view(cStrB, std::string_view::size_type(sizeB));
+	return vStr == vStrB;
 }
 
 InlineFunc
 Bool StringEqual(const Buffer &cStrA, const Buffer &cStrB)
 {
 	int result = 0;
-	if( (cStrA.size > 0) & (cStrA.size == cStrB.size))
-	{
-		result = sse42_strstr(cStrA.ptr, cStrA.size, cStrB.ptr, cStrB.size) == 0;
-	}
-	return result;
+	std::string_view vStr    = std::string_view(cStrA.ptr, std::string_view::size_type(cStrA.size));
+	std::string_view vStrB = std::string_view(cStrB.ptr, std::string_view::size_type(cStrB.size));
+	return vStr == vStrB;
 }
 
 InlineFunc
 Bool StringEqual(const Buffer &cStrA, char const *cStrB, str_size_t sizeB)
 {
-	int result = 0;
-	if( (cStrA.size > 0) & (cStrA.size == sizeB))
-	{
-		result = sse42_strstr(cStrA.ptr, cStrA.size, cStrB, sizeB) == 0;
-	}
-	return result;
+	std::string_view vStr    = std::string_view(cStrA.ptr, std::string_view::size_type(cStrA.size));
+	std::string_view vStrB = std::string_view(cStrB, std::string_view::size_type(sizeB));
+	return vStr == vStrB;
 }
 
 InlineFunc
@@ -167,7 +159,10 @@ Bool EndsWith(char const *strA, str_size_t strASize, char const *suffixStr, str_
 
 Bool StringContains(char const *str, str_size_t size, char const *subStr, str_size_t subStrSize, int scanDir = 1)
 {
-	return sse42_strstr(str, size, subStr, subStrSize) <= (size - subStrSize);
+	   std::string_view vStr    = std::string_view(str, std::string_view::size_type(size));
+	      std::string_view vSubStr = std::string_view(subStr, std::string_view::size_type(subStrSize));
+
+	               return vStr.find(vSubStr) != std::string_view::npos;
 	
 }
 
